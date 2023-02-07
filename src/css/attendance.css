@@ -1,0 +1,23 @@
+.attendance-card{
+    height: 90vh;
+}
+.attendance-scroll {
+    background-color: #F4F4F9;
+    height: 80vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+    text-align: center;
+    padding: 20px;
+    text-align: left;
+}
+
+.attendance-quote {
+    height: 20vh;
+}
+.attendance-report-card {
+    height: 48.5vh;
+}
+.attendance-report {
+    height: fit-content;
+    padding: 10px;
+}
