@@ -7,6 +7,8 @@ import { Checkbox } from '@mui/material';
 import { Typography, Container } from '@mui/material';
 import '../css/dashboard.css'
 import { ForkLeft } from '@mui/icons-material';
+import {useEffect, useState} from "react";
+import axiosClient from "../axios-client.js";
 
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -16,7 +18,56 @@ const Item = styled(Paper)(({ theme }) => ({
     borderRadius: '8px'
 }));
 
+
 export default function Dashboard() {
+    const [topics, setTopics] = useState([]);
+    const [tasks, setTasks] = useState([]);
+    const [events, setEvents] = useState([]);
+    const [notifications, setNotifications] = useState([]);
+    const [loading, setLoading] = useState(false);
+    
+    useEffect(() => {
+        setLoading(true)
+        Promise.all([getTopics(), getTasks(), getEvents(), getNotifications()])
+        .then(() => {
+            setLoading(false)
+        })
+        .catch(() => {
+            setLoading(false)
+        })
+    }, [])
+
+    const getTopics = () => {
+        return axiosClient.get('/topics')
+        .then(({ data }) => {
+            setTopics(data.data)
+            console.log(data);
+        })
+    }
+
+    const getTasks = () => {
+        return axiosClient.get('/tasks')
+        .then(({ data }) => {
+            setTasks(data.data)
+            console.log(data);
+        })
+    }
+
+    const getEvents = () => {
+        return axiosClient.get('/events')
+        .then(({ data }) => {
+            setEvents(data.data)
+            console.log(data);
+        })
+    }
+
+    const getNotifications = () => {
+        return axiosClient.get('/notifications')
+        .then(({ data }) => {
+            setNotifications(data.data)
+            console.log(data);
+        })
+    }
     return (
         <div>
             <Grid justifyContent="space-evenly" container rowSpacing={{ xs: 1, sm: 2, md: 3 }} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
@@ -24,14 +75,12 @@ export default function Dashboard() {
                     <Item>
                         <Typography variant='h6'>Topics</Typography>
                         <Paper className='scroll' square>
-                            <ul>
-                                <li><Checkbox/>
-                                    Jargons and Terms
-                                </li>
-                                <li><Checkbox/>
-                                    Web Development Stages
-                                </li>
-                            </ul>
+                        {topics && topics.map(t => (
+                        <ul key={t.id}>
+                            <li><Checkbox/>{t.topic_title}</li>
+                            <p>{t.topic_content}</p>
+                        </ul>
+                        ))}
                         </Paper>
                     </Item>
                 </Grid>
@@ -39,22 +88,48 @@ export default function Dashboard() {
                     <Item>
                         <Typography variant='h6'>Tasks</Typography>
                         <Paper className='scroll' square>
-                        <ul>
-                                <li><Checkbox/>
-                                    Paragraphs and Headings
-                                </li>
-                                <li><Checkbox/>
-                                    Basic CSS
-                                </li>
-                            </ul>
-                            </Paper>
+                        {tasks && tasks.map(t => (
+                        <ul key={t.id}>
+                            <li><Checkbox/>{t.task_title}</li>
+                            <p>{t.task_content}</p>
+                        </ul>
+                        ))}
+                        </Paper>
                     </Item>
                 </Grid>
                 <Grid item xs={6}>
                     <Item>
                         <Typography variant='h6'>Events</Typography>
                         <Paper className='scroll' square>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Blandit cursus risus at ultrices mi tempus. Tortor pretium viverra suspendisse potenti nullam ac tortor vitae. Leo integer malesuada nunc vel risus commodo. Blandit massa enim nec dui nunc mattis enim ut tellus. Eget mauris pharetra et ultrices neque ornare aenean euismod. Interdum varius sit amet mattis vulputate enim nulla. At elementum eu facilisis sed odio morbi quis commodo odio. Eget nullam non nisi est sit amet facilisis. Egestas diam in arcu cursus euismod quis. Et molestie ac feugiat sed lectus vestibulum. Egestas tellus rutrum tellus pellentesque eu tincidunt tortor aliquam. Et ligula ullamcorper malesuada proin libero nunc consequat interdum. Egestas sed tempus urna et pharetra pharetra. Sapien faucibus et molestie ac feugiat sed lectus. Eget felis eget nunc lobortis mattis aliquam. Pretium vulputate sapien nec sagittis aliquam malesuada bibendum arcu vitae. Amet dictum sit amet justo donec enim. Nunc consequat interdum varius sit amet mattis vulputate.
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>Event</th>
+                                <th>Detail</th>
+                                <th>Date</th>
+                            </tr>
+                            </thead>
+                            {loading &&
+                                <tbody>
+                                <tr>
+                                <td colSpan="5" className="text-center">
+                                    Loading...
+                                </td>
+                                </tr>
+                                </tbody>
+                            }
+                            {!loading &&
+                                <tbody>
+                                {events.map(e => (
+                                    <tr key={e.id}>
+                                        <td>{e.event_title}</td>
+                                        <td>{e.event_content}</td>
+                                        <td>{e.event_date}</td>
+                                    </tr>
+                                    ))}
+                                </tbody>
+                            }
+                        </table>
                         </Paper>
                     </Item>
                 </Grid>
@@ -62,8 +137,36 @@ export default function Dashboard() {
                     <Item>
                         <Typography variant='h6'>Notifications</Typography>
                         <Paper className='scroll' square>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Blandit cursus risus at ultrices mi tempus. Tortor pretium viverra suspendisse potenti nullam ac tortor vitae. Leo integer malesuada nunc vel risus commodo. Blandit massa enim nec dui nunc mattis enim ut tellus. Eget mauris pharetra et ultrices neque ornare aenean euismod. Interdum varius sit amet mattis vulputate enim nulla. At elementum eu facilisis sed odio morbi quis commodo odio. Eget nullam non nisi est sit amet facilisis. Egestas diam in arcu cursus euismod quis. Et molestie ac feugiat sed lectus vestibulum. Egestas tellus rutrum tellus pellentesque eu tincidunt tortor aliquam. Et ligula ullamcorper malesuada proin libero nunc consequat interdum. Egestas sed tempus urna et pharetra pharetra. Sapien faucibus et molestie ac feugiat sed lectus. Eget felis eget nunc lobortis mattis aliquam. Pretium vulputate sapien nec sagittis aliquam malesuada bibendum arcu vitae. Amet dictum sit amet justo donec enim. Nunc consequat interdum varius sit amet mattis vulputate.
-                            </Paper>
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>Event</th>
+                                <th>Detail</th>
+                                <th>Date</th>
+                            </tr>
+                            </thead>
+                            {loading &&
+                                <tbody>
+                                <tr>
+                                <td colSpan="5" className="text-center">
+                                    Loading...
+                                </td>
+                                </tr>
+                                </tbody>
+                            }
+                            {!loading &&
+                                <tbody>
+                                {notifications.map(notif => (
+                                    <tr key={notif.id}>
+                                        <td>{notif.notification_title}</td>
+                                        <td>{notif.notification_content}</td>
+                                        <td>{notif.notification_date}</td>
+                                    </tr>
+                                    ))}
+                                </tbody>
+                            }
+                        </table>
+                        </Paper>
                     </Item>
                 </Grid>
             </Grid>

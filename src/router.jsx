@@ -9,7 +9,8 @@ import Dashboard from "./views/Dashboard";
 import { Navigate } from "react-router-dom";
 import UserForm from "./views/UserForm";
 import Exercises from "./views/Exercises";
-import Attendance from "./views/Attendance";
+import Attendance from "./views/Attendances";
+import AttendanceForm from "./views/AttendanceForm";
 import Notes from "./views/Notes";
 import NoteForm from "./views/NoteForm";
 import Files from "./views/Files";
@@ -33,8 +34,16 @@ const router = createBrowserRouter ([
                 element: <Exercises/>
             },
             {
-                path: '/attendance',
+                path: '/attendances',
                 element: <Attendance/>
+            },
+            {
+                path: '/attendances/new',
+                element: <AttendanceForm key="attendanceCreate"/>
+            },
+            {
+                path: '/attendances/:id',
+                element: <AttendanceForm key="attendanceUpdate"/>
             },
             {
                 path: '/notes',

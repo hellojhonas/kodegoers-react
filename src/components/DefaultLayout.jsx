@@ -59,6 +59,31 @@ export default function DefaultLayout(props) {
 
     const container = window !== undefined ? () => window().document.body : undefined;
 
+    const onSubmit = ev => {
+        ev.preventDefault();
+        
+        const attendance = {
+        user_id: user.id,
+        attendance_status: 'Present',
+        created_at: new Date(),
+        attendance_title: 'This user is present',
+        attendance_content: 'This student is rocking his attendance'
+        };
+        
+        axiosClient.post("/attendances", attendance)
+        .then(() => {
+        setNotification("Attendance was successfully recorded");
+        navigate("/attendance");
+        // window.open("https://www.example.com", "_blank");
+        })
+        .catch(err => {
+        const response = err.response;
+        if (response && response.status === 422) {
+        setErrors(response.data.errors);
+        }
+        });
+        };
+
     return (
         <div className='with-bg'>
         <Box sx={{ display: 'flex' }}>
@@ -83,7 +108,10 @@ export default function DefaultLayout(props) {
                     <Typography variant="h6" noWrap component="div">
                         KodeGoers 
                     </Typography>
-                    <button className="btn btn-block">Enter Session<MeetingRoomIcon/></button>
+                    <button 
+                        className="btn btn-block" onClick={onSubmit}>
+                        Enter Session<MeetingRoomIcon/>
+                    </button>
                     </Toolbar>
 
                 </AppBar>
@@ -112,7 +140,7 @@ export default function DefaultLayout(props) {
                     <ul>
                         <p>User: {user.name}</p>
                         <li><DashboardIcon/><Link to="/dashboard">Dashboard</Link></li>
-                        <li><TodayIcon/><Link to="/attendance">Attendance</Link></li>
+                        <li><TodayIcon/><Link to="/attendances">Attendance</Link></li>
                         <li><QuizIcon/><Link to="/exercises">Exercises</Link></li>
                         <li><NotesIcon/><Link to="/notes">Notes</Link></li>
                         <li><FolderIcon/><Link to="/files">Files</Link></li>
@@ -157,7 +185,7 @@ export default function DefaultLayout(props) {
                     <ul>
                         <p>User: {user.name}</p>
                         <li><DashboardIcon/><Link to="/dashboard">Dashboard</Link></li>
-                        <li><TodayIcon/><Link to="/attendance">Attendance</Link></li>
+                        <li><TodayIcon/><Link to="/attendances">Attendance</Link></li>
                         <li><QuizIcon/><Link to="/exercises">Exercises</Link></li>
                         <li><NotesIcon/><Link to="/notes">Notes</Link></li>
                         <li><FolderIcon/><Link to="/files">Files</Link></li>
