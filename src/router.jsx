@@ -15,6 +15,8 @@ import Notes from "./views/Notes";
 import NoteForm from "./views/NoteForm";
 import Files from "./views/Files";
 import Settings from "./views/Settings";
+import Session from "./views/Session";
+import NotAvailable from "./views/NotAvailable";
 
 const router = createBrowserRouter ([
     {
@@ -76,6 +78,14 @@ const router = createBrowserRouter ([
             {
                 path: '/users/:id',
                 element: <UserForm key="userUpdate"/>
+            },
+            {
+                path: '/session',
+                element: <Session/>
+            },
+            {
+                path: '/notavailable',
+                element: <NotAvailable/>
             }
         ]
     },

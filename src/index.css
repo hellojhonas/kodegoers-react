@@ -36,7 +36,7 @@ input {
 }
 
 input:focus {
-    border-color: #5b08a7;
+    border-color: #22A7F0;
 }
 
 .btn,
@@ -54,7 +54,8 @@ input:focus {
     -webkit-transition: all 0.3 ease;
     transition: all 0.3 ease;
     cursor: pointer;
-    
+    margin: 0 auto;
+    margin-left: 20px;
     background: #22A7F0;
     border: 1px solid #B9AFBE;
     box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
@@ -79,15 +80,12 @@ input:focus {
     background-color: #b72424;
 }
 
-.btn-logout {
+.btn-logout-removed {
     text-decoration: none;
-    padding: 0.75rem 1.5rem;
+    /* padding: 0.75rem 1.5rem; */
     color: #212121;
     transition: all 0.3s;
     border-radius: 6px;
-}
-.btn-logout:hover {
-    background-color: rgba(0, 0, 0, 0.1);
 }
 
 .btn:hover,
@@ -104,6 +102,7 @@ table {
     width: 100%;
     border-spacing: 0;
     border-collapse: collapse;
+    /* border: 1px solid black; */
 }
 
 table > thead > tr > th {
@@ -115,7 +114,7 @@ table > thead > tr > th {
 table > tbody > tr > td {
     padding: 0.5rem 0.5rem;
     border-bottom: 1px solid #efefef;
-    white-space: nowrap;
+    /* white-space: nowrap; */
 }
 
 .card {
@@ -129,7 +128,7 @@ table > tbody > tr > td {
 
 .alert {
     padding: 1rem;
-    background-color: #ff4040;
+    background-color: #d14747;
     color: white;
     border-radius: 0.5rem;
     margin-bottom: 1rem;
@@ -183,6 +182,7 @@ table > tbody > tr > td {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    border-radius: 8px;
 }
 
 .login-signup-form .title {
@@ -199,20 +199,20 @@ table > tbody > tr > td {
 }
 
 .login-signup-form .form .message a {
-    color: #5b08a7;
+    color: #22A7F0;
     text-decoration: none;
 }
 
 /* Login/Signup form */
 
 
-#defaultLayout {
+/* #defaultLayout {
     display: flex;
-}
+} */
 
 #defaultLayout aside {
     width: 240px;
-    background-color: #5b08a7;
+    background-color: #22A7F0;
     padding: 1rem
 }
 
@@ -257,6 +257,10 @@ table > tbody > tr > td {
 .fadeInDown {
     -webkit-animation-name: fadeInDown;
     animation-name: fadeInDown;
+}
+
+.sign-in {
+    color: #22A7F0;
 }
 
 @keyframes fadeInDown {

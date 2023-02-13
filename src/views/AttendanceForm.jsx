@@ -1,4 +1,4 @@
-import {useNavigate, useParams} from "react-router-dom";
+import {useNavigate, useParams, Link} from "react-router-dom";
 import {useEffect, useState} from "react";
 import axiosClient from "../axios-client.js";
 import {useStateContext} from "../context/ContextProvider.jsx";
@@ -89,6 +89,7 @@ export default function AttendanceForm() {
             <input value={attendance.attendance_title} onChange={ev => setAttendance({...attendance, attendance_title: ev.target.value})} placeholder="Title"/>
             <textarea value={attendance.attendance_content} onChange={ev => setAttendance({...attendance, attendance_content: ev.target.value})} placeholder="Content"/>
             <button className="btn">Save</button>
+            <button className="btn"><Link to="/attendances">Cancel</Link></button>
           </form>
         }
       </div>

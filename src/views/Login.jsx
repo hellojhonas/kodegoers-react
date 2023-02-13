@@ -39,17 +39,17 @@ export default function Login() {
   }
 
   return (
+
     <Grid className="container" container spacing={2}>
-        <Grid item xs={6}>
+        <Grid item xs={12} md={6}>
           <div className="hero-text">
-            <h2>
+            <h2 className="login-h2">
               Taking your Learning Experience Out of This World!
             </h2>
-            
           </div>
           <img className="hero-img" src={loginastro}/>
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={12} md={6}>
           <div className="login-signup-form animated fadeInDown">
             <div className="form">
               <form onSubmit={onSubmit}>

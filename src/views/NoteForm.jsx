@@ -1,4 +1,4 @@
-import {useNavigate, useParams} from "react-router-dom";
+import {useNavigate, useParams, Link} from "react-router-dom";
 import {useEffect, useState} from "react";
 import axiosClient from "../axios-client.js";
 import {useStateContext} from "../context/ContextProvider.jsx";
@@ -86,7 +86,7 @@ export default function NoteForm() {
           <form onSubmit={onSubmit}>
             <input value={note.note_title} onChange={ev => setNote({...note, note_title: ev.target.value})} placeholder="Title"/>
             <textarea value={note.note_content} onChange={ev => setNote({...note, note_content: ev.target.value})} placeholder="Content"/>
-            <button className="btn">Save</button>
+            <button className="btn">Save</button><button className="btn"><Link to="/notes">Cancel</Link></button>
           </form>
         }
       </div>

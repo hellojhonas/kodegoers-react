@@ -1,4 +1,4 @@
-import {useNavigate, useParams} from "react-router-dom";
+import {useNavigate, useParams, Link} from "react-router-dom";
 import {useEffect, useState} from "react";
 import axiosClient from "../axios-client.js";
 import {useStateContext} from "../context/ContextProvider.jsx";
@@ -63,16 +63,19 @@ export default function UserForm() {
   return (
     <div>
         <Grid container spacing={2}>
-            <Grid item xs={6}>
+            <Grid item xs={12} md={6}>
                 <div className="student-id">
                     <h2>KodeGoers Bootcamp</h2>
                     <img className="id-image" src={idastro}/>
                     <p>Name: {user.name}</p>
                     <p>ID No. {user.id}</p>
+                    <p>Mailing Address: {user.mailing_address}</p>
+                    <p>Contact No. {user.contact_number}</p>
+                    <p>Specialization: {user.specialization}</p>
                     <img className="id-barcode" src={barcode}/>
                 </div>
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={12} md={6}>
                 <div className="login-signup-form settings-id">
                     <div className="form">
                     <h1>Your Information</h1>

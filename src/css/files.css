@@ -1,6 +1,6 @@
 .content-overflow {
     /* border: 1px solid black; */
-    white-space: nowrap;
+    /* white-space: nowrap; */
     overflow: hidden;
     text-overflow: ellipsis;
     max-width: 200px;
@@ -16,6 +16,7 @@
     -webkit-transition: all 0.3 ease;
     transition: all 0.3 ease;
     cursor: pointer;
+    margin: 0px auto;
     
     background: #22A7F0;
     border: 1px solid #B9AFBE;

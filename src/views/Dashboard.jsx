@@ -71,37 +71,46 @@ export default function Dashboard() {
     return (
         <div>
             <Grid justifyContent="space-evenly" container rowSpacing={{ xs: 1, sm: 2, md: 3 }} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-                <Grid item xs={6}>
+                <Grid item xs={12} md={6}>
                     <Item>
                         <Typography variant='h6'>Topics</Typography>
                         <Paper className='scroll' square>
+                        <h3>This week</h3>
                         {topics && topics.map(t => (
                         <ul key={t.id}>
-                            <li><Checkbox/>{t.topic_title}</li>
-                            <p>{t.topic_content}</p>
+                            <li>{t.topic_title}</li>
+                            <p className='content'>{t.topic_content}</p>
                         </ul>
                         ))}
                         </Paper>
                     </Item>
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={12} md={6}>
                     <Item>
                         <Typography variant='h6'>Tasks</Typography>
                         <Paper className='scroll' square>
                         {tasks && tasks.map(t => (
                         <ul key={t.id}>
-                            <li><Checkbox/>{t.task_title}</li>
-                            <p>{t.task_content}</p>
+                            <li className='title'><Checkbox/>{t.task_title}</li>
+                            <p className='content'>{t.task_content}</p>
                         </ul>
                         ))}
                         </Paper>
                     </Item>
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={12} md={6}>
                     <Item>
                         <Typography variant='h6'>Events</Typography>
                         <Paper className='scroll' square>
-                        <table>
+                        {events && events.map(e => (
+                        <ul key={e.id}>
+                            <li>{e.event_title}</li>
+                            <p className='date'>{e.event_date}</p>
+                            <p className='content'>{e.event_content}</p>
+                            
+                        </ul>
+                        ))}
+                        {/* <table>
                             <thead>
                             <tr>
                                 <th>Event</th>
@@ -129,15 +138,23 @@ export default function Dashboard() {
                                     ))}
                                 </tbody>
                             }
-                        </table>
+                        </table> */}
                         </Paper>
                     </Item>
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={12} md={6}>
                     <Item>
                         <Typography variant='h6'>Notifications</Typography>
                         <Paper className='scroll' square>
-                        <table>
+                        {notifications && notifications.map(notifs => (
+                        <ul key={notifs.id}>
+                            <li>{notifs.notification_title}</li>
+                            <p className='date'>{notifs.event_date}</p>
+                            <p className='content'>{notifs.notification_content}</p>
+                            
+                        </ul>
+                        ))}
+                        {/* <table>
                             <thead>
                             <tr>
                                 <th>Event</th>
@@ -165,7 +182,7 @@ export default function Dashboard() {
                                     ))}
                                 </tbody>
                             }
-                        </table>
+                        </table> */}
                         </Paper>
                     </Item>
                 </Grid>

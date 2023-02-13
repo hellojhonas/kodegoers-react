@@ -52,7 +52,7 @@ export default function Notes() {
       <div className="card animated fadeInDown">
         <div style={{display: 'flex', justifyContent: "space-between", alignItems: "center"}}>
           <h1>Notes</h1>
-          <Link className="btn-add" to="/notes/new">Add new</Link>
+          <Link className="new-note" to="/notes/new">Add new</Link>
         </div>
         <table>
           <thead>
@@ -78,7 +78,7 @@ export default function Notes() {
             {notes && notes.map(n => (
               <tr className="notes-row" key={n.id}>
                 {/* <td>{n.id}</td> */}
-                <td>{n.note_title}</td>
+                <td className="title-overflow">{n.note_title}</td>
                 <td className="content-overflow">{n.note_content}</td>
                 {/* <td>{n.created_at}</td> */}
                 <td>

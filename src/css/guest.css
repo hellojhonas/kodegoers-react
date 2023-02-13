@@ -14,12 +14,14 @@
     align-items: center;
     padding: 34px;
     padding-top: 200px;
-    font-size: 24px;
+    /* font-size: 24px; */
+    font-size: clamp(1.125rem, 0.6563rem + 1.5vw, 1.5rem);
     color: white;
     letter-spacing: 2px;
 }
+
 .hero-img {
-    height: 200px;
+    height: 300px;
     width: auto;
 }
 
@@ -28,4 +30,34 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.login-h2 {
+    text-shadow: 2px 2px 5px black;
+}
+
+.message {
+    margin-top: 20px;
+}
+
+@media screen and (max-width:900px) {
+    body {
+        text-align: center;
+    }
+    .hero-text {
+        height: auto;
+    }
+    .hero-img {
+        height: 150px;
+        width: auto;
+    }
+    .login-signup-form {
+        height: auto;
+        background: #f5f5f5;
+        width: 360px;
+        margin: 0 auto;
+        border-radius: 8px;
+        margin-bottom: 80px;
+    }
+
 }

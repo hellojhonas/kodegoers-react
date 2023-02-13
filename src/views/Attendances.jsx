@@ -55,8 +55,9 @@ export default function Attendances() {
     return (
         <div>
             <Grid justifyContent="space-evenly" container rowSpacing={{ xs: 1, sm: 2, md: 3 }} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-                <Grid item xs={6}>
-                    <Item className='attendance-card'>
+                <Grid item xs={12} md={12} lg={6}>
+                    <Grid>
+                    <Item className='attendance-card attendance'>
                         <Typography variant='h6'>Your Attendance</Typography>
                         <Paper className='attendance-scroll'>
                         <table>
@@ -88,6 +89,8 @@ export default function Attendances() {
                         </table>
                         </Paper>
                     </Item>
+                    </Grid>
+                    <Grid>
                     <Item className='attendance-card'>
                         <Typography variant='h6'>Your Request</Typography>
                         <Paper className='attendance-scroll'>
@@ -112,9 +115,9 @@ export default function Attendances() {
                             <tbody>
                                 {attendances.filter(at => at.attendance_status !== 'Present').map(at => (
                                 <tr key={at.id}>
-                                    <td>{at.attendance_title}</td>
-                                    <td>{at.attendance_content}</td>
-                                    <td><Link className="btn-edit" to={'/attendances/' + at.id}>Update Request</Link></td>
+                                    <td className="attendance-content">{at.attendance_title}</td>
+                                    <td className="attendance-content">{at.attendance_content}</td>
+                                    <td><Link className="attendance-btn" to={'/attendances/' + at.id}>Update</Link></td>
                                 </tr>
                                 ))}
                             </tbody>
@@ -122,27 +125,28 @@ export default function Attendances() {
                         </table>
                         </Paper>
                     </Item>
+                    </Grid>
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={12} md={12} lg={6}>
                     <div className='attendance-quote'>
-                        <h4>
+                        <h3>
                         "Attending every class is key to getting the most out of the bootcamp program, so make sure to be present and fully participate for maximum success!"
-                        </h4>
+                        </h3>
                     </div>
-                    <img className="hero-img" src={attendanceastro}/>
+                    <img className="attendance-astro" src={attendanceastro}/>
                     <Grid item xs={12}>
                     <Item className='attendance-report-card'>
                         <Typography variant='h6'>Student Attendance Helpdesk</Typography>
-                        <Paper className='attendance-report' square>
+                        <Paper className='attendance-report'>
                             <div>
-                                <h3>File for a leave</h3>
-                                <p>Don't forget to reach out to the program administrator if you need to take a break from your studies and request a leave of absence - just be sure to give the details and time frame in your friendly request.</p>
-                                <Link className="btn-add" to="/attendances/new">File Leave</Link>
+                                <h3 className='helpdesk-title'>File for a leave</h3>
+                                <p className='helpdesk-p'>Don't forget to reach out to the program administrator if you need to take a break from your studies and request a leave of absence - just be sure to give the details and time frame in your friendly request.</p>
+                                <Link className="attendance-file-btn" to="/attendances/new">File Leave</Link>
                             </div>
                             <div>
-                                <h3>Appeal for Excuse</h3>
-                                <p>Hey there, make sure to send in your report as soon as possible so that your absence can be considered excused and you can stay on track with the bootcamp program!</p>
-                                <Link className="btn-add" to="/attendances/new">File Report</Link>
+                                <h3 className='helpdesk-title'>Appeal for Excuse</h3>
+                                <p className='helpdesk-p'>Hey there, make sure to send in your report as soon as possible so that your absence can be considered excused and you can stay on track with the bootcamp program!</p>
+                                <Link className="attendance-file-btn" to="/attendances/new">File Report</Link>
                             </div>
                         </Paper>
                     </Item>

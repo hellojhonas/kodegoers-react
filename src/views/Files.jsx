@@ -1,7 +1,12 @@
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import '../css/files.css';
 
 export default function Files() {
+  const navigate = useNavigate();
+  const onSubmit = ev => {
+      ev.preventDefault();
+      navigate("/notavailable");
+  }
 
   return (
     <div>
@@ -23,12 +28,12 @@ export default function Files() {
                 <td className="content-overflow">
                     Introduction-to-web-dev.pdf
                 </td>
-                <td>January 10, 2023</td>
-                <td>
+                <td className="content-overflow">January 10, 2023</td>
+                <td className="content-overflow">
                     Instructor Name
                 </td>
                 <td>
-                <button className="download-btn">Download</button>
+                <button className="download-btn" onClick={onSubmit}>Download</button>
                 </td>
             </tr>
             <tr>
@@ -40,7 +45,7 @@ export default function Files() {
                     Instructor Name
                 </td>
                 <td>
-                <button className="download-btn">Download</button>
+                <button className="download-btn" onClick={onSubmit}>Download</button>
                 </td>
             </tr>
             </tbody>

@@ -11,7 +11,7 @@ import Typography from '@mui/material/Typography';
 import '../css/defaultLayout.css';
 
 import { useEffect } from "react";
-import { Link, Outlet, Navigate } from "react-router-dom";
+import { Link, Outlet, Navigate, useNavigate } from "react-router-dom";
 import axiosClient from "../axios-client";
 import { useStateContext } from "../context/ContextProvider";
 
@@ -23,10 +23,11 @@ import QuizIcon from '@mui/icons-material/Quiz';
 import NotesIcon from '@mui/icons-material/Notes';
 import FolderIcon from '@mui/icons-material/Folder';
 import MeetingRoomIcon from '@mui/icons-material/MeetingRoom';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 
 export default function DefaultLayout(props) {
-    const {user, token, notification, setUser, setToken} = useStateContext()
+    const {user, token, notification, setUser, setToken, setNotification} = useStateContext()
 
     if (!token) {
         return <Navigate to="/login"/>
@@ -59,9 +60,13 @@ export default function DefaultLayout(props) {
 
     const container = window !== undefined ? () => window().document.body : undefined;
 
+    const navigate = useNavigate();
+
     const onSubmit = ev => {
         ev.preventDefault();
+
         
+
         const attendance = {
         user_id: user.id,
         attendance_status: 'Present',
@@ -73,8 +78,8 @@ export default function DefaultLayout(props) {
         axiosClient.post("/attendances", attendance)
         .then(() => {
         setNotification("Attendance was successfully recorded");
-        navigate("/attendance");
-        // window.open("https://www.example.com", "_blank");
+        navigate("/session");
+        // window.open("https://hellojhonas.github.io/kodegoers-end/", "_blank", 'noopener noreferrer');
         })
         .catch(err => {
         const response = err.response;
@@ -109,8 +114,7 @@ export default function DefaultLayout(props) {
                         KodeGoers 
                     </Typography>
                     <button 
-                        className="btn btn-block" onClick={onSubmit}>
-                        Enter Session<MeetingRoomIcon/>
+                        className="enter-session-btn" onClick={onSubmit}>Enter Session<MeetingRoomIcon/>
                     </button>
                     </Toolbar>
 
@@ -138,7 +142,7 @@ export default function DefaultLayout(props) {
                 <Divider />
                 <nav className="nav">
                     <ul>
-                        <p>User: {user.name}</p>
+                        <li><AccountCircleIcon/><p className='user'>User: {user.name}</p></li>
                         <li><DashboardIcon/><Link to="/dashboard">Dashboard</Link></li>
                         <li><TodayIcon/><Link to="/attendances">Attendance</Link></li>
                         <li><QuizIcon/><Link to="/exercises">Exercises</Link></li>
@@ -153,8 +157,7 @@ export default function DefaultLayout(props) {
                 <ul>
                 <li>
                     <SettingsIcon/>
-                    <a href="#">Settings</a>
-                </li>
+                    <Link to="/settings">Settings</Link></li>
                 <li>
                     <LogoutIcon/>
                     <a className="btn-logout" href="#" onClick={onLogout}>Logout</a>
@@ -165,8 +168,7 @@ export default function DefaultLayout(props) {
             <nav className='footer'>
                 <ul>
                 <li>Copyright 2023 KodeGoers</li>
-                <li>Terms and Services</li>
-                <li>Privacy Policy</li>
+                <a className='footer-a' href="https://www.termsfeed.com/live/7ba75402-ac1a-456f-a473-1dadcabbe08a" target={'_blank'}>Privacy Policy</a>
                 </ul>
             </nav>
             </Drawer>
@@ -183,7 +185,7 @@ export default function DefaultLayout(props) {
             <Divider />
                 <nav className="nav">
                     <ul>
-                        <p>User: {user.name}</p>
+                        <li><AccountCircleIcon/><p className='user'>User: {user.name}</p></li>
                         <li><DashboardIcon/><Link to="/dashboard">Dashboard</Link></li>
                         <li><TodayIcon/><Link to="/attendances">Attendance</Link></li>
                         <li><QuizIcon/><Link to="/exercises">Exercises</Link></li>
@@ -207,8 +209,7 @@ export default function DefaultLayout(props) {
             <nav className='footer'>
                 <ul>
                 <li>Copyright 2023 KodeGoers</li>
-                <li>Terms and Services</li>
-                <li>Privacy Policy</li>
+                <a className='footer-a' href="https://www.termsfeed.com/live/7ba75402-ac1a-456f-a473-1dadcabbe08a" target={'_blank'}>Privacy Policy</a>
                 </ul>
             </nav>
 
